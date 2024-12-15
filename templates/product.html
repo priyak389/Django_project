@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Product</title>
+    {% endblock title %}
+     
+     
+    {% block main %}
+      
+      
+      <div class="row">
+        {% for i in pet %}
+        <div class="col-md-6">
+             
+             <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap" height="500px" width="200px">
+                       
+        </div>
+        <div class="col-md-6">
+            <h5 class="card-title">{{i.petname|upper}}</h5>
+            <p class="card-text"> {{i.desc}}</p>
+            <p class="card-text"> {{i.price}}</p>
+            
+            <a href="{% url 'addtocart' i.id %}"><button class="btn btn-danger">Add to Cart</button></a>
+            <a href="/viewcart"><button class="btn btn-danger">view Cart</button></a>
+           
+           
+           
+           
+           
+           
+            {% if success %}
+             <div class="alert alert-success">
+                {{success}}
+            </div>
+            {% endif %}    
+            {% if msg %}
+                  <div class="alert alert-danger">
+               {{msg}}
+           </div>
+          {% endif %}  
+ 
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        
+      </div>
+
+
+
+    {% endblock main %}

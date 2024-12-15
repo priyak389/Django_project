@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+ 
+
+ 
+ 
+     
+    {% block main %}
+<!--cart code start-->
+<div class="row mt-5">
+    <div class="col-md-9">
+        hello
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <h5 class="bg-danger text-white p-3">Customer Details</h5>
+        <p><strong>Name:</strong>{{x.uid.username}}</p>
+        
+        <p><strong>Email</strong>{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+
+        <div class="row">
+            {% for x in data %}
+            <div class="col-md-4">
+                <img src="{{x.pid.image.url}}" width="100%" alt="">
+            </div>
+            <div class="col-md-6">
+          <p><strong>Product Name:</strong> {{x.pid.petname}}</p>
+          <p><Strong>Price:</Strong>{{x.pid.price}}</p>
+          
+         <p>
+            <strong>Quantity</strong>
+            <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+            <input type="number" value="{{x.qty}}" readonly>
+            <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+         </p>
+         <a href="remove/{{x.id}}"><button class="btn btn-danger">remove</button></a>
+           
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    
+</div>
+    <!--customer and product details-->
+    <div class="col-md-3">
+        <h5 class="bg-danger text-white p-3">Total Amount</h5>
+        <p><strong>Total:</strong>{{total}}</p>
+        <hr>
+        <p><strong>Total Amount:</strong>{{total}}</p>
+       {% comment %} <a href="{% url 'placeorder' %}"><button class="btn btn-danger">place order</a></button> {% endcomment %}
+       <a href="{% url 'placeorder' %}"><button class="btn btn-danger">Place order</a></button>
+    </div>
+    
+    
+    {% endblock main %}

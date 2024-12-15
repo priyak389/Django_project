@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>HOme</title>
+    {% endblock title %}
+
+ 
+ 
+     
+    {% block main %}
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'images/banner3.jpg' %}" class="d-block w-100" alt="..." height="350px">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/banner2.avif' %}" class="d-block w-100" alt="..." height="350px">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/banner1.avif' %}" class="d-block w-100" alt="..." height="350px">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+  
+
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"> 
+              <h5>Filter by Category</h5>
+                <ul class="list-group">
+                    <li class="list-group-item"><a class="text-decoration-none" href="{% url 'home' %}">All Categories</a></li>
+                    {% for i in breed %}
+                    <li class="list-group-item"><a href="{% url 'breed' i.id %}">{{i.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                <h5>Filter by Price</h5>
+                <hr>  
+                <form action="{% url 'range' %}">
+                 <div class="mb-3">
+                   <div class="mb-3">
+                     <label for="Input1" class="form-label">Min Value:</label>
+                     <input type="number" name ="min" class="form-control" id="Input1" placeholder="Minimum Value">
+                   </div><!--min value-->
+                   <div class="mb-3">
+                     <label for="Input2" class="form-label">Max Value:</label>
+                     <input type="number" name="max" class="form-control" id="Input2" placeholder="Maximum Value">
+                   </div><!--max value-->
+                   <div class="mb-3">
+                     <input type="submit"  class="btn btn-primary" value="Register">
+                   </div>
+                 </div>
+                </form>
+                <h5>Sort By Price</h5>
+                <hr>  
+                <p><a class="anchor" href="/sort/0">Low to High</a></p> 
+                <p><a class="anchor" href="/sort/1">High to Low</a></p> 
+       
+
+            </div>
+
+
+
+ 
+
+            <div class="col-md-9">
+
+
+
+                <div class="row">
+                  
+                    <div class="col-sm-4">
+                 
+                      {% for pet in pet %}
+                        <div class="card" style="width: 18rem;">
+                          <img class="card-img-top" src="{{ pet.image.url }}" alt="Card image cap" height="200px">
+                          <div class="card-block">
+                            <h5 class="card-title">{{pet.petname|upper}}</h5>
+                            <p class="card-text"> {{pet.desc}}</p>
+                            <p class="card-text"> {{pet.price}}</p>
+                             <a href="{% url 'addprod' pet.id %}">View Pet</a>
+                               
+                          </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div> 
+               
+                      </div>
+              
+            </div>
+        </div>
+      
+
+    </div>
+
+ 
+
+
+      {% endblock main %}

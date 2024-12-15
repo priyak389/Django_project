@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>LOginnew page</title>
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block main %}
+<div class="container text-center p-1 rounded shadow bg-primary">
+    <h1 class="display-6">Login</h1>
+</div>
+<div class="container my-5 p-5 w-50 shadow">
+    <form action="{% url 'user_login' %}" method="POST">
+        {% csrf_token %}
+
+        {% for fm in forms %}
+            <div class="mb-3">
+                {{fm.label_tag}}
+                {{fm}}
+          
+            </div>
+
+        {% endfor %}
+
+
+        <div class="mb-3 text-center">
+            <input type="submit" value="Login" class="btn btn-primary">
+        </div>
+        {% if msg %}
+        <div class="alert alert-danger">
+        {{msg}}
+ </div>
+{% endif %}  
+
+    </form>
+    
+    <a href="{% url 'forgotpassword' %}"><button type="button">Forget password</button></a>
+
+</div>
+
+{% endblock main %}
+
+
+{% block js %}
+{% endblock js %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

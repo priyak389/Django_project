@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Order Status</title>
+    {% endblock title %}
+ 
+{% block main %}
+<div class="row">
+    
+    {% for i in ord %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ i.pet.image.url }}" alt="Card image cap" height="200px">
+        <div class="card-block">
+          <h5 class="card-title">{{i.pet.petname|upper}}</h5>
+          <p class="card-text"> {{i.pet.desc}}</p>
+          <p class="card-text"> {{i.pet.price}}</p>
+          <p class="card-text"> {{i.order_date}}</p>
+           <button>  {{i.status}} </button>
+
+        </div>
+     
+        <div class="tracking">
+            <div class="title">Tracking Order</div>
+        </div>
+
+        {% if i.status == 'PENDING' %}
+        <div class="progress-track ml-5">
+            <ul id="progressbar">
+                <li class="step0 active " id="step1">Pending</li>
+                <li class="step0  text-center" id="step2">Processing</li>
+                <li class="step0  text-right" id="step3">Completed</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if i.status == 'PROCESSING' %}
+        <div class="progress-track ml-5">
+            <ul id="progressbar">
+                <li class="step0 active " id="step1">Pending</li>
+                <li class="step0 active text-center" id="step2">Processing</li>
+                <li class="step0  text-right" id="step3">Completed</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if i.status == 'COMPLETED' %}
+        <div class="progress-track ml-5">
+            <ul id="progressbar">
+                <li class="step0 active " id="step1">Pending</li>
+                <li class="step0 active text-center" id="step2">Processing</li>
+                <li class="step0 active text-right" id="step3">Completed</li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+   {% endfor %}
+</div>
+      
+         
+            
+      
+        {% endblock main %}
